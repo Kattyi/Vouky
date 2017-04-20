@@ -21,8 +21,8 @@
           <td class="text-center"><%= dictionary.word %></td>
           <td class="text-center"><%= dictionary.translation %></td>
           <td class="text-center">
-            <%= link_to 'Detail', dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
-            <%= link_to 'Edit', edit_dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
+            <%= link_to 'Details', dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
+            <%= link_to 'Edit | More', edit_dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
             <%= link_to 'Delete', dictionary_path(dictionary), method: :delete, :class => "btn btn-outline-primary" %>
           </td>
         </tr>
