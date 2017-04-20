@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <h1><%= link_to 'Dictionary', welcome_index_path %></h1>
+
+  <% # TODO %>
+  <% # OPTIMIZE %>
+  <% # FIXME replace form with render 'form' %>
+
+  <%= render 'form', dictionary: Dictionary.new %>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">Word</th>
+        <th class="text-center">Translation</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <% @dictionaries.each do |dictionary| %>
+        <tr>
+          <td class="text-center"><%= dictionary.word %></td>
+          <td class="text-center"><%= dictionary.translation %></td>
+          <td class="text-center">
+            <%= link_to 'Detail', dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
+            <%= link_to 'Edit', edit_dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
+            <%= link_to 'Delete', dictionary_path(dictionary), method: :delete, :class => "btn btn-outline-primary" %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <%= link_to_prev_page @dictionaries, '<< Prev', :class => "btn btn-outline-primary btn-sm" %>
+      <%= link_to_next_page @dictionaries, 'Next >>', :class => "btn btn-outline-primary btn-sm" %>
+    </div>
+  </div>
+
+</div>
