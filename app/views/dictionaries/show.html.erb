@@ -1,21 +1,20 @@
 <% provide(:title, @dictionary.word) %>
-<div class="container-fluid">
-  <h1><%= link_to 'Detail', dictionaries_path %></h1>
+<p>
+<h1>Details</h1>
+</p>
 
-  <table class="table">
-    <tr>
-      <th class="text-center">WORD</th>
-      <th class="text-center">TRANSLATION</th>
-    </tr>
+<table class="table">
+  <tr>
+    <th class="text-center">WORD</th>
+    <th class="text-center">TRANSLATION</th>
+  </tr>
 
-    <tr>
-      <td class="text-center"><%= @dictionary.word %></td>
-      <td class="text-center"><%= @dictionary.translation %></td>
-    </tr>
-  </table>
-  <p>
-    <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-primary" %>
-    <%= link_to 'Edit', edit_dictionary_path(@dictionary), :class => "btn btn-outline-primary" %>
-  </p>
-
-</div>
+  <tr>
+    <td class="text-center"><%= @dictionary.word %></td>
+    <td class="text-center"><%= @dictionary.translation %></td>
+  </tr>
+</table>
+<p>
+  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-primary" %>
+  <%= link_to 'Edit', edit_dictionary_path(@dictionary), :class => "btn btn-outline-primary" %>
+</p>
