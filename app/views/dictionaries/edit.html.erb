@@ -1,3 +1,4 @@
+<% provide(:title, "Edit") %>
 <div class="container-fluid">
   <h1><%= link_to 'Edit', welcome_index_path %></h1>
 
@@ -7,4 +8,5 @@
     <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-primary" %>
     <%= link_to 'Delete', dictionary_path(@dictionary), method: :delete, :class => "btn btn-outline-primary" %>
   </p>
+
 </div>
