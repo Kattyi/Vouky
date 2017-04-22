@@ -6,17 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#
-
-
-# browsers = ['Internet Explorer',
-#             'Opera',
-#             'Safari',
-#             'Mozilla Firefox',
-#             'Google Chrome',
-#             'Microsoft Edge']
-
-
+=begin
 1000000.times do
   Dictionaries.create([{word: Faker::Lorem.word,
                         translation: Faker::Lorem.word,
@@ -28,3 +18,12 @@
                         user_id: Faker::Number.between(45003, 158282)
                        }])
 end
+=end
+
+=begin
+533362.times do
+  user = User.find_or_initialize_by(email: nil)
+  user.email = Faker::Internet.email
+  user.save
+end
+=end
