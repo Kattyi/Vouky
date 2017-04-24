@@ -36,8 +36,9 @@ class DictionariesController < ApplicationController
     redirect_to dictionaries_path
   end
 
-  # whitelist the parameters to prevent wrongful mass assignment
   private
+
+  # whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
     params.require(:dictionary).permit(:word, :translation)
   end
