@@ -2,12 +2,28 @@
 
 <h1>All users</h1>
 
-<div class="list-group">
-  <%= render @users %>
-</div>
-<div class="row">
-  <div class="col-sm-12 text-center">
-    <%= link_to_prev_page @users, '<< Prev', :class => "btn btn-outline-primary btn-sm" %>
-    <%= link_to_next_page @users, 'Next >>', :class => "btn btn-outline-primary btn-sm" %>
-  </div>
-</div>
+<%= render 'layouts/pagination', table: @users %>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th class="text-left">Avatar</th>
+    <th class="text-left">User name</th>
+    <th class="text-left">Actions</th>
+  </tr>
+  </thead>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td class="text-left"><%= gravatar_for(user) %></td>
+        <td class="text-left"><%= user.name %></td>
+        <td class="text-left">
+          <% if current_user.admin? && !current_user?(user) %>
+              <%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure?" },class: "btn btn-outline-danger" %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+<%= render 'layouts/pagination', table: @users %>

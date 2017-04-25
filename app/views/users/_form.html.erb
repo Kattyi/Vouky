@@ -6,7 +6,7 @@
     </p>
     <p>
       <%= f.label :email %>
-      <%= f.email_field :email, class: "form-control", placeholder: "E-mail" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "E-mail", disabled: true %>
     </p>
     <p>
       <%= f.label :password %>
@@ -16,5 +16,5 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Retype password" %>
     </p>
-    <p class="text-right"><%= f.submit yield(:button_text), class: "btn btn-primary" %></p>
+    <p class="text-right"><%= f.submit yield(:button_text), class: "btn btn-outline-secondary" %></p>
 <% end %>

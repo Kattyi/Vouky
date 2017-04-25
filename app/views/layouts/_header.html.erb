@@ -1,26 +1,28 @@
 <header>
-  <nav class="navbar navbar-toggleable-sm navbar-light bg-faded">
+  <nav class="navbar navbar-toggleable-sm navbar-light bg-faded" id="navbar">
     <%= link_to image_tag("vouky.svg", alt: "Vouky logo", id: "logo", class: "navbar-brand"), root_path %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li><%= link_to 'Home', root_path, class: "nav-link" %></li>
-        <li><%= link_to 'Dictionary', dictionaries_path, class: "nav-link" %></li>
 
         <% if logged_in? %>
+            <li><%= link_to 'Dictionary', dictionaries_path, class: "nav-link" %></li>
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" type="link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= current_user.name %>
               </a>
-              <div class="dropdown-menu">
-                <%= link_to "Profile", current_user, class: "nav-link" %>
-                <%= link_to "Settings", edit_user_path(current_user), class: "nav-link" %>
-                <%= link_to "Users", users_path, class: "nav-link" %>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%= link_to "Profile", current_user, class: "dropdown-item" %>
+                <%= link_to "Settings", edit_user_path(current_user), class: "dropdown-item" %>
+                <% if current_user.admin? %>
+                    <%= link_to "Users", users_path, class: "dropdown-item" %>
+                <% end %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %>
+                <%= link_to "Log out", logout_path, method: :delete, class: "dropdown-item" %>
               </div>
             </div>
 
@@ -31,7 +33,7 @@
 
       <%= form_tag(dictionaries_path, method: :get, class: "form-inline my-2 my-lg-0") do %> <%# dictionaries path vymenit za destination view #%>
           <%= text_field_tag :search, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
-          <%= submit_tag 'Search', name: nil, class: "btn btn-outline-primary my-2 my-sm-0" %>
+          <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>
       <% end %>
 
     </div>

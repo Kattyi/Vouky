@@ -1,11 +1,11 @@
 <% provide(:title, @dictionary.word) %>
 <h1>Edit</h1>
 
-<p>
+<div>
   <%= render 'form', dictionary: @dictionary %>
-</p>
+</div>
 
-<p>
-  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-primary" %>
-  <%= link_to 'Delete', dictionary_path(@dictionary), method: :delete, :class => "btn btn-outline-primary" %>
-</p>
+<div class="btn-group" role="group" aria-label="Actions">
+  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-secondary" %>
+  <%= link_to 'Delete', dictionary_path(@dictionary), method: :delete, :class => "btn btn-outline-danger" %>
+</div>

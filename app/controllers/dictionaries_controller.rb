@@ -26,12 +26,14 @@ class DictionariesController < ApplicationController
 
   def update
     @dictionary = Dictionary.find(params[:id])
+    flash[:success] = @dictionary.word + " edited"
     @dictionary.update(dictionary_params)
     redirect_to dictionaries_path
   end
 
   def destroy
     @dictionary = Dictionary.find(params[:id])
+    flash[:success] = @dictionary.word + " deleted"
     @dictionary.destroy
     redirect_to dictionaries_path
   end

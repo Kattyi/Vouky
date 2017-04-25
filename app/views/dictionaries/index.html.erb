@@ -6,32 +6,30 @@
 <% # FIXME replace form with render 'form' %>
 
 <%= render 'form', dictionary: Dictionary.new %>
+<%= render 'layouts/pagination', table: @dictionaries %>
 
 <table class="table table-hover">
   <thead>
   <tr>
-    <th class="text-center">Word</th>
-    <th class="text-center">Translation</th>
-    <th class="text-center">Actions</th>
+    <th>Word</th>
+    <th>Translation</th>
+    <th>Actions</th>
   </tr>
   </thead>
 
   <% @dictionaries.each do |dictionary| %>
       <tr>
-        <td class="text-center"><%= dictionary.word %></td>
-        <td class="text-center"><%= dictionary.translation %></td>
-        <td class="text-center">
-          <%= link_to 'Details', dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
-          <%= link_to 'Edit | More', edit_dictionary_path(dictionary), :class => "btn btn-outline-primary" %>
-          <%= link_to 'Delete', dictionary_path(dictionary), method: :delete, :class => "btn btn-outline-primary" %>
+        <td><%= dictionary.word %></td>
+        <td><%= dictionary.translation %></td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Actions">
+            <%= link_to 'Details', dictionary_path(dictionary), :class => "btn btn-outline-success" %>
+            <%= link_to 'Edit', edit_dictionary_path(dictionary), :class => "btn btn-outline-info" %>
+            <%= link_to 'Delete', dictionary_path(dictionary), method: :delete, :class => "btn btn-outline-danger" %>
+          </div>
         </td>
       </tr>
   <% end %>
 </table>
 
-<div class="row">
-  <div class="col-sm-12 text-center">
-    <%= link_to_prev_page @dictionaries, '<< Prev', :class => "btn btn-outline-primary btn-sm" %>
-    <%= link_to_next_page @dictionaries, 'Next >>', :class => "btn btn-outline-primary btn-sm" %>
-  </div>
-</div>
+<%= render 'layouts/pagination', table: @dictionaries %>

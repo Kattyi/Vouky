@@ -12,7 +12,8 @@
     <td class="text-center"><%= @dictionary.translation %></td>
   </tr>
 </table>
-<p>
-  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-primary" %>
-  <%= link_to 'Edit', edit_dictionary_path(@dictionary), :class => "btn btn-outline-primary" %>
-</p>
+
+<div class="btn-group" role="group" aria-label="Actions">
+  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-secondary" %>
+  <%= link_to 'Edit', edit_dictionary_path(@dictionary), :class => "btn btn-outline-info" %>
+</div>
