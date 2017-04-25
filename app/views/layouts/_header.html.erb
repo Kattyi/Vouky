@@ -27,12 +27,13 @@
         <% else %>
             <li class="nav-item"><%= link_to 'Log in', login_path, :class => "nav-link" %></li>
         <% end %>
-
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+
+      <%= form_tag(dictionaries_path, method: :get, class: "form-inline my-2 my-lg-0") do %> <%# dictionaries path vymenit za destination view #%>
+          <%= text_field_tag :search, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
+          <%= submit_tag 'Search', name: nil, class: "btn btn-outline-primary my-2 my-sm-0" %>
+      <% end %>
+
     </div>
   </nav>
 </header>
