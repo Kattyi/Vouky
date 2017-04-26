@@ -1,7 +1,8 @@
 class DictionariesController < ApplicationController
 
   def index
-    @dictionaries = Dictionary.order(created_at: :desc).page params[:page]
+    user = current_user
+    @dictionaries = user.dictionaries.order(created_at: :desc).page params[:page]
     @dictionaries.without_count
   end
 
@@ -18,8 +19,9 @@ class DictionariesController < ApplicationController
   end
 
   def create
-    @dictionary = Dictionary.new(dictionary_params)
-    @dictionary.save
+    user = current_user
+    @dictionary = user.dictionaries.where(dictionary_params).first_or_create(dictionary_params)
+    flash[:success] = @dictionary.word + " created"
     redirect_to dictionaries_path
   end
 
@@ -42,7 +44,7 @@ class DictionariesController < ApplicationController
 
   # whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
-    params.require(:dictionary).permit(:word, :translation)
+    params.require(:dictionary).permit(:word, :translation, :user_id)
   end
 
 end
