@@ -32,10 +32,12 @@
         <% end %>
       </ul>
 
-      <% # OPTIMIZE nerob query ked neni v modeli specifikovany search (zatial skaredo cez index controllera) %>
-      <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
-          <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
-          <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>
+      <% if logged_in? %>
+          <% # OPTIMIZE nerob query ked neni v modeli specifikovany search (zatial skaredo cez index controllera) %>
+          <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+              <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
+              <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>
+          <% end %>
       <% end %>
 
     </div>

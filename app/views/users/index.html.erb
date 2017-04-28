@@ -7,6 +7,7 @@
   <tr>
     <th>Avatar</th>
     <th>User name</th>
+    <th>E-mail</th>
     <th><%= render 'layouts/pagination', table: @users %></th>
   </tr>
   </thead>
@@ -15,9 +16,10 @@
       <tr>
         <td><%= gravatar_for(user) %></td>
         <td><%= user.name %></td>
+        <td><%= user.email %></td>
         <td class="text-right">
           <% if current_user.admin? && !current_user?(user) %>
-              <%= link_to "delete", user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+              <%= link_to "delete", user, method: :delete, data: {confirm: "The user " + user.name + " will be deleted."}, class: "btn btn-outline-danger" %>
           <% end %>
         </td>
       </tr>
