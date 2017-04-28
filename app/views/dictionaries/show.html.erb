@@ -14,6 +14,7 @@
 </table>
 
 <div class="btn-group" role="group" aria-label="Actions">
-  <%= link_to 'Back', dictionaries_path, :class => "btn btn-outline-secondary" %>
-  <%= link_to 'Edit', edit_dictionary_path(@dictionary), :class => "btn btn-outline-info" %>
+  <%= link_to 'Back', dictionaries_path, class: "btn btn-outline-secondary" %>
+  <%= link_to 'Edit', edit_dictionary_path(@dictionary), class: "btn btn-outline-info" %>
+  <%= link_to 'Delete', dictionary_path(@dictionary), method: :delete, class: "btn btn-outline-danger" %>
 </div>

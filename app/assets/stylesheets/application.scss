@@ -19,6 +19,10 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 
+.container-fluid {
+  padding-bottom: 80px;
+}
+
 table {
   margin-top: 20px;
 }

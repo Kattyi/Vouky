@@ -5,12 +5,17 @@ class DictionariesController < ApplicationController
     user = current_user
     search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
     if params[:term]
-      @dictionaries = user.dictionaries.where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
-                          .order(created_at: :desc).page params[:page]
+      @dictionaries = user.dictionaries
+                          .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                          .order(created_at: :desc)
+                          .page params[:page]
     else
-      @dictionaries = user.dictionaries.order(created_at: :desc).page params[:page]
-      @dictionaries.without_count
+      @dictionaries = user.dictionaries
+                          .where(language_id: params[:language])
+                          .order(created_at: :desc)
+                          .page params[:page]
     end
+    @dictionaries.without_count
 
   end
 

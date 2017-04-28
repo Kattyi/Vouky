@@ -7,19 +7,19 @@
 <table class="table table-hover">
   <thead>
   <tr>
-    <th class="text-left">Avatar</th>
-    <th class="text-left">User name</th>
-    <th class="text-left">Actions</th>
+    <th>Avatar</th>
+    <th>User name</th>
+    <th></th>
   </tr>
   </thead>
 
   <% @users.each do |user| %>
       <tr>
-        <td class="text-left"><%= gravatar_for(user) %></td>
-        <td class="text-left"><%= user.name %></td>
-        <td class="text-left">
+        <td><%= gravatar_for(user) %></td>
+        <td><%= user.name %></td>
+        <td class="text-right">
           <% if current_user.admin? && !current_user?(user) %>
-              <%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure?" },class: "btn btn-outline-danger" %>
+              <%= link_to "delete", user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
           <% end %>
         </td>
       </tr>
