@@ -1,0 +1,20 @@
+<% provide(:title, "Languages") %>
+
+<h1>Languages</h1>
+
+<% @languages.each_slice(4) do |row| %>
+    <div class="card-group">
+      <% row.each do |language| %>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">
+                <%= link_to language[0], dictionaries_path(:language => language[0]) %>
+              </h4>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted text-right"><%= language[1] %> words</small>
+            </div>
+          </div>
+      <% end %>
+    </div>
+<% end %>

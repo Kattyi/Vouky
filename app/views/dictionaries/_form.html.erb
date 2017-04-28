@@ -6,12 +6,13 @@
           <%= f.text_field :word, class: "form-control form-control-lg", placeholder: "Word" %>
         </div>
 
-        <div class="col-5">
+        <div class="col-4">
           <%= f.text_field :translation, class: "form-control form-control-lg", placeholder: "Translation" %>
         </div>
 
-        <div class="col-2 col align-self-center">
+        <div class="col-3 text-right">
           <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
+          <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg", disabled: true %>
         </div>
 
       </div>

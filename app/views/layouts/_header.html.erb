@@ -7,10 +7,11 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li><%= link_to 'Home', root_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Home', root_path, class: "nav-link" %></li>
 
         <% if logged_in? %>
-            <li><%= link_to 'Dictionary', dictionaries_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Dictionary', dictionaries_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Languages', languages_path, class: "nav-link" %></li>
             <div class="dropdown">
               <a class="nav-link dropdown-toggle" type="link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                 <%= current_user.name %>
@@ -31,8 +32,9 @@
         <% end %>
       </ul>
 
-      <%= form_tag(dictionaries_path, method: :get, class: "form-inline my-2 my-lg-0") do %> <%# dictionaries path vymenit za destination view #%>
-          <%= text_field_tag :search, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
+      <% # OPTIMIZE nerob query ked neni v modeli specifikovany search (zatial skaredo cez index controllera) %>
+      <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+          <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
           <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>
       <% end %>
 
