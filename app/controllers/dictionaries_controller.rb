@@ -1,9 +1,17 @@
 class DictionariesController < ApplicationController
 
+  # OPTIMIZE move to model dictionary.rb
   def index
     user = current_user
-    @dictionaries = user.dictionaries.order(created_at: :desc).page params[:page]
-    @dictionaries.without_count
+    search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
+    if params[:term]
+      @dictionaries = user.dictionaries.where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                          .order(created_at: :desc).page params[:page]
+    else
+      @dictionaries = user.dictionaries.order(created_at: :desc).page params[:page]
+      @dictionaries.without_count
+    end
+
   end
 
   def show
@@ -44,7 +52,7 @@ class DictionariesController < ApplicationController
 
   # whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
-    params.require(:dictionary).permit(:word, :translation, :user_id)
+    params.require(:dictionary).permit(:word, :translation, :user_id, :term)
   end
 
 end

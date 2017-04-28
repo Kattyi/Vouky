@@ -3,9 +3,16 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only:  :destroy
 
+
   def index
-    @users = User.order(created_at: :desc).page params[:page]
-    @users.without_count
+    # OPTIMIZE move to model user.rb
+    if params[:term]
+      @users = User.where('lower(name) LIKE ?', "%#{params[:term]}%".downcase).order(created_at: :desc).page params[:page]
+    else
+      @users = User.order(created_at: :desc).page params[:page]
+      @users.without_count
+    end
+
   end
 
   def show
@@ -51,7 +58,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation, :term)
   end
 
   # Confirms a logged-in user.
