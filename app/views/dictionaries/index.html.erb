@@ -6,7 +6,6 @@
 <% # FIXME %>
 
 <%= render 'form', dictionary: Dictionary.new %>
-<%= render 'layouts/pagination', table: @dictionaries %>
 
 <table class="table table-hover">
   <thead>
@@ -14,7 +13,7 @@
     <th>Word</th>
     <th>Translation</th>
     <th>Note</th>
-    <th></th>
+    <th><%= render 'layouts/pagination', table: @dictionaries %></th>
   </tr>
   </thead>
 

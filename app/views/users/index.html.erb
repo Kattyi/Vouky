@@ -2,14 +2,12 @@
 
 <h1>All users</h1>
 
-<%= render 'layouts/pagination', table: @users %>
-
 <table class="table table-hover">
   <thead>
   <tr>
     <th>Avatar</th>
     <th>User name</th>
-    <th></th>
+    <th><%= render 'layouts/pagination', table: @users %></th>
   </tr>
   </thead>
 
