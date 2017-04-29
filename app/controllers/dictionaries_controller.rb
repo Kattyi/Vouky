@@ -35,7 +35,7 @@ class DictionariesController < ApplicationController
     user = current_user
     @dictionary = user.dictionaries.where(dictionary_params).first_or_create(dictionary_params)
     flash[:success] = @dictionary.word + " created"
-    redirect_to dictionaries_path
+    redirect_back(fallback_location: dictionaries_path)
   end
 
 
@@ -43,21 +43,21 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
     flash[:success] = @dictionary.word + " edited"
     @dictionary.update(dictionary_params)
-    redirect_to dictionaries_path
+    redirect_to dictionaries_path(:language_id => params[:language])
   end
 
   def destroy
     @dictionary = Dictionary.find(params[:id])
     flash[:success] = @dictionary.word + " deleted"
     @dictionary.destroy
-    redirect_to dictionaries_path
+    redirect_back(fallback_location: dictionaries_path)
   end
 
   private
 
   # whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
-    params.require(:dictionary).permit(:word, :translation, :user_id, :term)
+    params.require(:dictionary).permit(:word, :translation, :user_id, :term, :language_id)
   end
 
 end

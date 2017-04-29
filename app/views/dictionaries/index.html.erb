@@ -24,9 +24,9 @@
         <td><%= dictionary.note %></td>
         <td>
           <div class="btn-group float-right" role="group" aria-label="Actions">
-            <%= link_to 'Details', dictionary_path(dictionary), class: "btn btn-outline-success" %>
-            <%= link_to 'Edit', edit_dictionary_path(dictionary), class: "btn btn-outline-info" %>
-            <%= link_to 'Delete', dictionary_path(dictionary), method: :delete, class: "btn btn-outline-danger" %>
+            <%= link_to 'Details', dictionary_path(dictionary, language: params[:language]), class: "btn btn-outline-success" %>
+            <%= link_to 'Edit', edit_dictionary_path(dictionary, language: params[:language]), class: "btn btn-outline-info" %>
+            <%= link_to 'Delete', dictionary_path(dictionary, language: params[:language]), method: :delete, class: "btn btn-outline-danger" %>
           </div>
         </td>
       </tr>

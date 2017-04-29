@@ -8,9 +8,10 @@
 
         <div class="col-6">
           <%= f.text_field :translation, class: "form-control form-control-lg", placeholder: "Translation" %>
+          <%= f.hidden_field :language_id, value: params[:language] %>
         </div>
 
-        <div class="col-12">
+        <div class="col-12" id="save_translate_buttons">
           <div class="btn-group float-right" role="group" aria-label="Actions">
             <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
             <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg", disabled: true %>

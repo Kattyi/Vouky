@@ -12,7 +12,7 @@
           <div class="card">
             <div class="card-block">
               <h4 class="card-title">
-                <%= link_to language[0], dictionaries_path(:language => @languages_ids.find_by(name: language[0])[:id]) %>
+                <%= link_to language[0], dictionaries_path(language: @languages_ids.find_by(name: language[0])[:id]) %>
               </h4>
             </div>
             <div class="card-footer">
