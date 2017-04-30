@@ -16,5 +16,12 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Retype password" %>
     </p>
+
+    <%= f.fields_for :groups_member do |gm| %>
+      <p>
+        <%= gm.label :group_id, "Do you belong to a classroom?" %>
+        <%= gm.text_field :group_id, class: "form-control", placeholder: "Classroom ID" %>
+      </p>
+    <% end %>
     <p class="text-right"><%= f.submit yield(:button_text), class: "btn btn-lg btn-success" %></p>
 <% end %>
