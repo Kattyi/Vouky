@@ -53,6 +53,11 @@ class DictionariesController < ApplicationController
     redirect_back(fallback_location: dictionaries_path)
   end
 
+=begin
+  DELETE FROM "dictionaries"
+  WHERE "dictionaries"."id" = $1
+=end
+
   private
 
   # whitelist the parameters to prevent wrongful mass assignment

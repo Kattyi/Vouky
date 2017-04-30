@@ -1,5 +1,11 @@
 <% provide(:title, "Dictionary") %>
-<h1>Dictionary</h1>
+<h1>
+  <% if Language.find_by(id: params[:language]) != nil %>
+      <%= Language.find_by(id: params[:language]).name %>
+  <% else %>
+      Dictionary
+  <% end %>
+</h1>
 
 <% # TODO %>
 <% # OPTIMIZE %>

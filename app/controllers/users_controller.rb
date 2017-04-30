@@ -34,6 +34,13 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
+=begin
+  INSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at", "activation_digest")
+  VALUES ($1, $2, $3, $4, $5, $6)
+  RETURNING "id"
+=end
+
+
   def edit
     @user = User.find(params[:id])
   end

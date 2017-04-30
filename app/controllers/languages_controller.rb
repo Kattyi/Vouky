@@ -17,6 +17,16 @@ class LanguagesController < ApplicationController
     end
     @languages_ids = Language.joins(:dictionaries).select(:id)
 
+=begin
+    SELECT COUNT(*) AS count_all, "languages"."name" AS languages_name
+    FROM "languages"
+    INNER JOIN "dictionaries" ON "dictionaries"."language_id" = "languages"."id"
+    WHERE "dictionaries"."user_id" = 158285
+    GROUP BY "languages"."name"
+    ORDER BY count(languages.name) DESC
+=end
+
+
   end
 
   private
