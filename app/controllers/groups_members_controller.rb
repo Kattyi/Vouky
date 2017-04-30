@@ -1,8 +1,8 @@
 class GroupsMembersController < ApplicationController
 
   def create
-    @Member = Groups_member.new(groups_member_params)
-    @Member.save
+    @groups_member = Groups_member.new(groups_member_params)
+    @groups_member.save
     flash[:success] = "Successfully added to the classroom"
     redirect_to 'users/show'
   end

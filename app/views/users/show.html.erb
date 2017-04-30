@@ -9,6 +9,11 @@
         <%= gravatar_for @user %>
         <h1 class="only-bottom-margin"><%= @user.name %></h1>
         <span class="text-muted">Email:</span> <%= @user.email %><br>
+        <span class="text-muted">Groups:</span>
+        <% @groups_member.each do |gm| %>
+            <%= gm.group.name %>
+        <% end %>
+        <br>
         <small class="text-muted">Registred: <%= @user.created_at %></small>
       </div>
     </div>

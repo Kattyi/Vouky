@@ -21,7 +21,6 @@
       <p>
         <%= gm.label :group_id, "Do you belong to a classroom?" %>
         <%= gm.text_field :group_id, class: "form-control", placeholder: "Classroom ID" %>
-        <%= gm.hidden_field :user_id, value: current_user.id %>
       </p>
     <% end %>
     <p class="text-right"><%= f.submit yield(:button_text), class: "btn btn-lg btn-success" %></p>
