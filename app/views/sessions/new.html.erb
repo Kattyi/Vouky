@@ -8,11 +8,11 @@
 
         <p>
           <%= f.label :email %>
-          <%= f.email_field :email, class: "form-control", placeholder: "E-mail" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "E-mail", required: true %>
         </p>
         <p>
           <%= f.label :password %>
-          <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+          <%= f.password_field :password, class: "form-control", placeholder: "Password", required: true %>
         </p>
 
         <%= f.label :remember_me, class: "checkbox inline" do %>

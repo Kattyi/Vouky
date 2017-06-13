@@ -7,8 +7,6 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li><%= link_to 'Vouky', root_path, class: "nav-link" %></li>
-
         <% if logged_in? %>
             <li class="nav-item"><%= link_to 'Dictionary', dictionaries_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to 'Languages', languages_path, class: "nav-link" %></li>
@@ -26,14 +24,13 @@
                 <%= link_to "Log out", logout_path, method: :delete, class: "dropdown-item" %>
               </div>
             </div>
-
         <% else %>
             <li class="nav-item"><%= link_to 'Log in', login_path, class: "nav-link" %></li>
         <% end %>
       </ul>
 
       <% if logged_in? %>
-          <% # OPTIMIZE nerob query ked neni v modeli specifikovany search (zatial skaredo cez index controllera) %>
+          <% # OPTIMIZE nerob query ked neni v modeli specifikovany search %>
           <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
               <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
               <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>

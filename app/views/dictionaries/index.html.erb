@@ -1,6 +1,6 @@
 <% provide(:title, "Dictionary") %>
 <h1>
-  <% if Language.find_by(id: params[:language]) != nil %>
+  <% if Language.find_by(id: params[:language]) %>
       <%= Language.find_by(id: params[:language]).name %>
   <% else %>
       Dictionary
@@ -22,17 +22,16 @@
     <th><%= render 'layouts/pagination', table: @dictionaries %></th>
   </tr>
   </thead>
-
-  <% @dictionaries.each do |dictionary| %>
+  <% @dictionaries.each do |record| %>
       <tr>
-        <td><%= dictionary.word %></td>
-        <td><%= dictionary.translation %></td>
-        <td><%= dictionary.note %></td>
+        <td><%= record.word %></td>
+        <td><%= record.translation %></td>
+        <td><%= record.note %></td>
         <td>
           <div class="btn-group float-right" role="group" aria-label="Actions">
-            <%= link_to 'Details', dictionary_path(dictionary, language: params[:language]), class: "btn btn-outline-success" %>
-            <%= link_to 'Edit', edit_dictionary_path(dictionary, language: params[:language]), class: "btn btn-outline-info" %>
-            <%= link_to 'Delete', dictionary_path(dictionary, language: params[:language]), method: :delete, class: "btn btn-outline-danger" %>
+            <%= link_to 'Details', dictionary_path(record), class: "btn btn-outline-success" %>
+            <%= link_to 'Edit', edit_dictionary_path(record), class: "btn btn-outline-info" %>
+            <%= link_to 'Delete', dictionary_path(record), method: :delete, class: "btn btn-outline-danger" %>
           </div>
         </td>
       </tr>

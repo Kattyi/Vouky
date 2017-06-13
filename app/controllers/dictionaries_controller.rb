@@ -2,6 +2,7 @@ class DictionariesController < ApplicationController
 
   # OPTIMIZE move to model dictionary.rb
   def index
+
     user = current_user
     search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
     if params[:term]
@@ -16,6 +17,9 @@ class DictionariesController < ApplicationController
                           .page params[:page]
     end
     @dictionaries.without_count
+
+    @langs = EasyTranslate::LANGUAGES
+    @language_list = Language.all
 
   end
 
@@ -32,10 +36,23 @@ class DictionariesController < ApplicationController
   end
 
   def create
-    user = current_user
-    @dictionary = user.dictionaries.where(dictionary_params).first_or_create(dictionary_params)
+    EasyTranslate.api_key = 'AIzaSyDPn-JkZmeKQOWMgjpBBgIRkta3LRQyX-Q'
+    #user = current_user
+
+    @dictionary = Dictionary.create(dictionary_params)
+    if @dictionary.translation.empty?
+      @dictionary.translation = EasyTranslate.translate(@dictionary.word, from: :en, to: :sk)
+    end
+    @dictionary.save
     flash[:success] = @dictionary.word + " created"
-    redirect_back(fallback_location: dictionaries_path)
+    redirect_to dictionaries_path(language: @dictionary.language_id)
+
+=begin
+    @dictionary = user.dictionaries.where(dictionary_params).first_or_create(dictionary_params)
+    if dictionary_params[:word] != '' and dictionary_params[:translation] != ''
+      flash[:success] = @dictionary.word + " created"
+    end
+=end
   end
 
 
@@ -43,7 +60,7 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
     flash[:success] = @dictionary.word + " edited"
     @dictionary.update(dictionary_params)
-    redirect_to dictionaries_path(:language_id => params[:language])
+    redirect_to dictionaries_path(language: @dictionary.language_id)
   end
 
   def destroy
@@ -53,14 +70,13 @@ class DictionariesController < ApplicationController
     redirect_back(fallback_location: dictionaries_path)
   end
 
-=begin
-  DELETE FROM "dictionaries"
-  WHERE "dictionaries"."id" = $1
-=end
+  def translate
+    @translation = EasyTranslate.translate(params[:word], from: :en, to: :sk)
+  end
 
   private
 
-  # whitelist the parameters to prevent wrongful mass assignment
+# whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
     params.require(:dictionary).permit(:word, :translation, :user_id, :term, :language_id)
   end

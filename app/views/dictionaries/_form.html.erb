@@ -8,13 +8,19 @@
 
         <div class="col-6">
           <%= f.text_field :translation, class: "form-control form-control-lg", placeholder: "Translation" %>
-          <%= f.hidden_field :language_id, value: params[:language] %>
+          <% if params[:language] %>
+              <%= f.hidden_field :language_id, value: params[:language] %>
+          <% end %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
         </div>
 
         <div class="col-12" id="save_translate_buttons">
+
+          <%= f.select :language_id, @language_list.map {|lang| [lang.name, "#{lang.id}"]}, class: "custom-select", selected: params[:language] %>
+
           <div class="btn-group float-right" role="group" aria-label="Actions">
             <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
-            <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg", disabled: true %>
+            <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg" %>
           </div>
         </div>
 

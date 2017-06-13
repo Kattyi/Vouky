@@ -65,4 +65,5 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end
 
-
+# Google Translate (with Bulk translate) in Ruby | https://github.com/seejohnrun/easy_translate
+gem 'easy_translate'
