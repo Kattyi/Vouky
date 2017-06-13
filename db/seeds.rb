@@ -29,16 +29,6 @@ end
 =end
 
 
-=begin
-52.times do
-  user = User.find_or_initialize_by(email: nil)
-  user.email = Faker::Internet.email
-  user.save
-end
-=end
-
-
-=begin
 langs_list = [
     ["af", "afrikaans"],
     ["sq", "albanian"],
@@ -98,4 +88,3 @@ langs_list = [
 langs_list.each do |code, name|
   Language.create(name: name.capitalize)
 end
-=end
