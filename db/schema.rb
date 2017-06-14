@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425222458) do
+ActiveRecord::Schema.define(version: 20170614165459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20170425222458) do
     t.index ["category_id"], name: "index_dictionaries_on_category_id", using: :btree
     t.index ["language_id"], name: "index_dictionaries_on_language_id", using: :btree
     t.index ["user_id"], name: "index_dictionaries_on_user_id", using: :btree
+  end
+
+  create_table "dictionaries_categories", force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "dictionary_id"
+    t.index ["category_id"], name: "index_dictionaries_categories_on_category_id", using: :btree
+    t.index ["dictionary_id"], name: "index_dictionaries_categories_on_dictionary_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|
@@ -76,8 +83,8 @@ ActiveRecord::Schema.define(version: 20170425222458) do
     t.text     "name"
     t.text     "email"
     t.text     "password_digest"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "remember_digest"
     t.boolean  "admin",             default: false
     t.string   "activation_digest"
@@ -85,15 +92,20 @@ ActiveRecord::Schema.define(version: 20170425222458) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
+    t.integer  "language_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["language_id"], name: "index_users_on_language_id", using: :btree
   end
 
   add_foreign_key "dictionaries", "categories"
   add_foreign_key "dictionaries", "languages"
   add_foreign_key "dictionaries", "users"
+  add_foreign_key "dictionaries_categories", "categories"
+  add_foreign_key "dictionaries_categories", "dictionaries"
   add_foreign_key "groups", "languages"
   add_foreign_key "groups_members", "groups"
   add_foreign_key "groups_members", "users"
   add_foreign_key "logins", "users"
   add_foreign_key "reports", "users"
+  add_foreign_key "users", "languages"
 end

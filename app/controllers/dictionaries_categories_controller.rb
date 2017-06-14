@@ -1,0 +1,2 @@
+class DictionariesCategoriesController < ApplicationController
+end

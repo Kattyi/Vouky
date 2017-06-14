@@ -5,12 +5,16 @@
   <tr>
     <th class="text-center">Word</th>
     <th class="text-center">Translation</th>
-    <th class="text-center">Note</th>
+    <th class="text-center">Categories</th>
   </tr>
 
   <tr>
     <td class="text-center"><%= @dictionary.word %></td>
     <td class="text-center"><%= @dictionary.translation %></td>
-    <td class="text-center"><%= @dictionary.note %></td>
+    <td class="text-center">
+      <% categories_for_word(@dictionary.id).each do |cat| %>
+          <button type="button" class="btn btn-sm btn-outline-secondary margin_bottom"><%= cat.category.name %></button>
+      <% end %>
+    </td>
   </tr>
 </table>

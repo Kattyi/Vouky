@@ -1,25 +1,25 @@
 class DictionariesController < ApplicationController
 
-  # OPTIMIZE move to model dictionary.rb
-  def index
+  include DictionariesCategoriesHelper
 
-    user = current_user
+  def index
     search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
     if params[:term]
-      @dictionaries = user.dictionaries
-                          .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
-                          .order(created_at: :desc)
-                          .page params[:page]
+      @dictionaries = Dictionary.where(user_id: current_user.id)
+                                .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                                .where(language_id: params[:language])
+                                .order(created_at: :desc)
+                                .page params[:page]
     else
-      @dictionaries = user.dictionaries
-                          .where(language_id: params[:language])
-                          .order(created_at: :desc)
-                          .page params[:page]
+      @dictionaries = Dictionary.where(user_id: current_user.id)
+                                .where(language_id: params[:language])
+                                .order(created_at: :desc)
+                                .page params[:page]
     end
     @dictionaries.without_count
 
-    @langs = EasyTranslate::LANGUAGES
     @language_list = Language.all
+    @categories_list = Category.all
 
   end
 
@@ -36,23 +36,28 @@ class DictionariesController < ApplicationController
   end
 
   def create
+
     EasyTranslate.api_key = 'AIzaSyDPn-JkZmeKQOWMgjpBBgIRkta3LRQyX-Q'
-    #user = current_user
 
-    @dictionary = Dictionary.create(dictionary_params)
-    if @dictionary.translation.empty?
-      @dictionary.translation = EasyTranslate.translate(@dictionary.word, from: :en, to: :sk)
-    end
-    @dictionary.save
-    flash[:success] = @dictionary.word + " created"
-    redirect_to dictionaries_path(language: @dictionary.language_id)
+    if dictionary_params[:word].blank? and dictionary_params[:translation].blank?
+      flash[:danger] = "Please fill in word or translation"
+      redirect_back fallback_location: dictionaries_path
+    else
+      @dictionary = Dictionary.create(dictionary_params)
+      mother_lang = Language.find(current_user.language_id).name.downcase
 
-=begin
-    @dictionary = user.dictionaries.where(dictionary_params).first_or_create(dictionary_params)
-    if dictionary_params[:word] != '' and dictionary_params[:translation] != ''
+      if @dictionary.translation.empty?
+        source_lang = Language.find(@dictionary.language_id).name.downcase
+        @dictionary.translation = EasyTranslate.translate(@dictionary.word, from: source_lang, to: mother_lang)
+      elsif @dictionary.word.empty?
+        dest_lang = Language.find(@dictionary.language_id).name.downcase
+        @dictionary.word = EasyTranslate.translate(@dictionary.translation, from: mother_lang, to: dest_lang)
+      end
+      @dictionary.save
       flash[:success] = @dictionary.word + " created"
+      redirect_to dictionaries_path(language: @dictionary.language_id)
     end
-=end
+
   end
 
 
@@ -68,10 +73,6 @@ class DictionariesController < ApplicationController
     flash[:success] = @dictionary.word + " deleted"
     @dictionary.destroy
     redirect_back(fallback_location: dictionaries_path)
-  end
-
-  def translate
-    @translation = EasyTranslate.translate(params[:word], from: :en, to: :sk)
   end
 
   private

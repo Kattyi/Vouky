@@ -7,15 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 =begin
-1000000.times do
-  Dictionaries.create([{word: Faker::Lorem.word,
+1000.times do
+  Dictionary.create([{word: Faker::Lorem.word,
                         translation: Faker::Lorem.word,
-                        note: Faker::Lorem.sentence,
                         created_at: Faker::Time.between(20.days.ago, Date.today, :all),
                         updated_at: Faker::Time.between(20.days.ago, Date.today, :all),
-                        language_id: Faker::Number.between(1, 103),
+                        language_id: 13,
                         category_id: Faker::Number.between(1, 199),
-                        user_id: Faker::Number.between(45003, 158282)
+                        user_id: 158285
                        }])
 end
 =end
@@ -29,6 +28,7 @@ end
 =end
 
 
+=begin
 langs_list = [
     ["af", "afrikaans"],
     ["sq", "albanian"],
@@ -88,3 +88,4 @@ langs_list = [
 langs_list.each do |code, name|
   Language.create(name: name.capitalize)
 end
+=end

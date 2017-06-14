@@ -1,7 +1,7 @@
 <%= form_for dictionary do |f| %>
     <div class="form-group">
-      <div class="row">
 
+      <div class="row">
         <div class="col-6">
           <%= f.text_field :word, class: "form-control form-control-lg", placeholder: "Word" %>
         </div>
@@ -13,17 +13,31 @@
           <% end %>
           <%= f.hidden_field :user_id, value: current_user.id %>
         </div>
+      </div>
 
-        <div class="col-12" id="save_translate_buttons">
-
-          <%= f.select :language_id, @language_list.map {|lang| [lang.name, "#{lang.id}"]}, class: "custom-select", selected: params[:language] %>
-
-          <div class="btn-group float-right" role="group" aria-label="Actions">
-            <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
-            <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg" %>
-          </div>
+      <div class="row">
+        <div class="col-6 marginTop">
+          <% unless @language_list.nil? %>
+              <%= f.select :language_id, @language_list.map {|lang| [lang.name, "#{lang.id}"]}, {selected: params[:language], required: true}, {class: "custom_select margin_bottom"} %>
+          <% end %>
         </div>
 
+        <div class="col-6 marginTop">
+          <% unless @categories_list.nil? %>
+              <%= f.select :category_id, @categories_list.map {|cat| [cat.name, "#{cat.id}"]}, {prompt: "Select category"}, {class: "custom_select margin_bottom"} %>
+          <% end %>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-12 marginTop">
+          <div class="btn-group float-right" role="group" aria-label="Actions">
+            <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
+            <% unless @language_list.nil? %>
+                <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
     </div>
 <% end %>

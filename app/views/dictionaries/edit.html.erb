@@ -3,5 +3,8 @@
 
 <div>
   <%= render 'form', dictionary: @dictionary %>
+  <% categories_for_word(@dictionary.id).each do |cat| %>
+      <button type="button" class="btn btn-sm btn-danger margin_bottom"><%= cat.category.name %></button>
+  <% end %>
 </div>
 

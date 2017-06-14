@@ -21,14 +21,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
+    @language_list = Language.all
   end
 
   def create
-    User.transaction do
-      @user = User.where(email: params[:user][:email]).first_or_create(user_params)
-      @groups_member = GroupsMember.where(user_id: @user.id, group_id: params[:user][:groups_member][:group_id])
-                           .first_or_create(user_id: @user.id, group_id: params[:user][:groups_member][:group_id])
-    end
+    @user = User.where(email: params[:user][:email]).first_or_create(user_params)
     @user.send_activation_email
     flash[:info] = "Please check your email to activate your account."
     redirect_to root_url
@@ -36,19 +34,17 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+
+    @language_list = Language.all
   end
 
   def update
     @user = User.find(params[:id])
-    User.transaction do
-      if @user.update_attributes(user_params)
-        @groups_member = GroupsMember.where(user_id: @user.id, group_id: params[:user][:groups_member][:group_id])
-                             .first_or_create(user_id: @user.id, group_id: params[:user][:groups_member][:group_id])
-        flash[:success] = "Profile updated"
-        redirect_to @user
-      else
-        render 'edit'
-      end
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
     end
   end
 
@@ -61,7 +57,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :term, :groups_member)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :term, :groups_member, :language_id)
   end
 
   def groups_member_params

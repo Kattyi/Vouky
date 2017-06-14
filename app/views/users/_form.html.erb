@@ -16,12 +16,9 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Retype password", required: true %>
     </p>
-
-    <%= f.fields_for :groups_member do |gm| %>
-      <p>
-        <%= gm.label :group_id, "Do you belong to a classroom?" %>
-        <%= gm.text_field :group_id, class: "form-control", placeholder: "Classroom ID" %>
-      </p>
-    <% end %>
+    <p>
+      <%= f.label :mother_language, "Mother language" %>
+      <%= f.select :language_id, @language_list.map {|lang| [lang.name, "#{lang.id}"]} %>
+    </p>
     <p class="text-right"><%= f.submit yield(:button_text), class: "btn btn-lg btn-success" %></p>
 <% end %>

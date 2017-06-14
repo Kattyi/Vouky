@@ -1,11 +1,18 @@
-<% provide(:title, "Languages") %>
+<% provide(:title, "Dictionaries") %>
 
-<h1>Languages</h1>
+<h1>Dictionaries</h1>
+
+<div class="row">
+  <div class="col-12">
+    <%= link_to 'Create', dictionaries_path, class: "btn btn-outline-secondary float-left margin_bottom" %>
+  </div>
+</div>
+
 
 <% @languages.each_slice(4) do |row| %>
     <div class="card-group">
       <% row.each do |language| %>
-          <div class="card">
+          <div class="card margin_bottom">
             <div class="card-block">
               <h4 class="card-title">
                 <%= link_to language[0], dictionaries_path(language: @languages_ids.find_by(name: language[0])[:id]) %>
