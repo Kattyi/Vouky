@@ -28,7 +28,6 @@ end
 =end
 
 
-=begin
 langs_list = [
     ["af", "afrikaans"],
     ["sq", "albanian"],
@@ -88,4 +87,3 @@ langs_list = [
 langs_list.each do |code, name|
   Language.create(name: name.capitalize)
 end
-=end
