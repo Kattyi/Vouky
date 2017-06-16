@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   root    'welcome#index'
   get     'welcome/index'
   get     '/login',         to: 'sessions#new'
@@ -11,6 +7,8 @@ Rails.application.routes.draw do
   get     '/contact',       to: 'contact#contact'
   get     '/signup',        to: 'users#new'
   get     '/languages',     to: 'languages#index'
+  get 'password_resets/new'
+  get 'password_resets/edit'
 
   resources :dictionaries_categories
   resources :dictionaries
