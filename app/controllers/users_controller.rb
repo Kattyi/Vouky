@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @groups_member = GroupsMember.where(user_id: params[:id])
+    @language = Language.find(@user.language_id).name
   end
 
   def new

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'password_resets/new'
   get 'password_resets/edit'
 
+  resources :languages
   resources :dictionaries_categories
   resources :dictionaries
   resources :users

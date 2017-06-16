@@ -4,12 +4,13 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-sm-10">
         <%= gravatar_for @user %>
         <h1 class="only-bottom-margin"><%= @user.name %></h1>
-        <span class="text-muted">Email:</span> <%= @user.email %><br>
-        <small class="text-muted">Registred: <%= @user.created_at %></small>
+        <span class="text-muted">Email: <%= @user.email %></span><br>
+        <span class="text-muted">Mother language: <%= @language %></span><br>
+        <span class="text-muted">Registred: <%= @user.created_at %></span>
       </div>
     </div>
   </div>
