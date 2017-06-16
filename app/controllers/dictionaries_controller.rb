@@ -6,15 +6,15 @@ class DictionariesController < ApplicationController
     search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
     if params[:term]
       @dictionaries = Dictionary.where(user_id: current_user.id)
-                                .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
-                                .where(language_id: params[:language])
-                                .order(created_at: :desc)
-                                .page params[:page]
+                          .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                          .where(language_id: params[:language])
+                          .order(created_at: :desc)
+                          .page params[:page]
     else
       @dictionaries = Dictionary.where(user_id: current_user.id)
-                                .where(language_id: params[:language])
-                                .order(created_at: :desc)
-                                .page params[:page]
+                          .where(language_id: params[:language])
+                          .order(created_at: :desc)
+                          .page params[:page]
     end
     @dictionaries.without_count
 
@@ -33,6 +33,7 @@ class DictionariesController < ApplicationController
 
   def edit
     @dictionary = Dictionary.find(params[:id])
+    @categories_list = Category.all
   end
 
   def create
@@ -53,6 +54,8 @@ class DictionariesController < ApplicationController
         dest_lang = Language.find(@dictionary.language_id).name.downcase
         @dictionary.word = EasyTranslate.translate(@dictionary.translation, from: mother_lang, to: dest_lang)
       end
+      @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
+                                   .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
       @dictionary.save
       flash[:success] = @dictionary.word + " created"
       redirect_to dictionaries_path(language: @dictionary.language_id)
@@ -65,7 +68,11 @@ class DictionariesController < ApplicationController
     @dictionary = Dictionary.find(params[:id])
     flash[:success] = @dictionary.word + " edited"
     @dictionary.update(dictionary_params)
-    redirect_to dictionaries_path(language: @dictionary.language_id)
+
+    @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
+                                                 .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
+
+    redirect_to edit_dictionary_path(@dictionary)
   end
 
   def destroy
@@ -77,9 +84,13 @@ class DictionariesController < ApplicationController
 
   private
 
-# whitelist the parameters to prevent wrongful mass assignment
+  # whitelist the parameters to prevent wrongful mass assignment
   def dictionary_params
-    params.require(:dictionary).permit(:word, :translation, :user_id, :term, :language_id)
+    params.require(:dictionary).permit(:word, :translation, :user_id, :term, :language_id, :dictionaries_category)
+  end
+
+  def dictionaries_categories_params
+    params.permit(:category_id, :dictionary_id)
   end
 
 end

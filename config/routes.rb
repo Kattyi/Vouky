@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get     '/signup',        to: 'users#new'
   get     '/languages',     to: 'languages#index'
 
+  resources :dictionaries_categories
   resources :dictionaries
   resources :users
   resources :account_activations, only: [:edit]

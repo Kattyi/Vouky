@@ -17,16 +17,16 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th class="text-center">Word</th>
-        <th class="text-center">Translation</th>
+        <th class="text-left">Word</th>
+        <th class="text-left">Translation</th>
         <th class="text-left">Categories</th>
         <th><%= render 'layouts/pagination', table: @dictionaries %></th>
       </tr>
       </thead>
       <% @dictionaries.each do |record| %>
           <tr>
-            <td class="text-center"><%= record.word %></td>
-            <td class="text-center"><%= record.translation %></td>
+            <td class="text-left"><%= record.word %></td>
+            <td class="text-left"><%= record.translation %></td>
             <td class="text-left">
               <% categories_for_word(record.id).each do |cat| %>
                   <button type="button" class="btn btn-sm btn-outline-secondary margin_bottom"><%= cat.category.name %></button>
