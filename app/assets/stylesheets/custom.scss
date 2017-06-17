@@ -15,10 +15,10 @@
 .custom_select {
   width: inherit;
   display: inline-block;
-  text-align: center;
   vertical-align: middle;
   background: transparent;
-  border-color: #CCCCCC;
+  border: 1px solid #CCCCCC;
+  border-radius: 0.3rem;
   color: #464a4c;
   line-height: 1.25;
   font-size: 1.25rem;
@@ -33,6 +33,7 @@
   vertical-align: middle;
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
   color: #464a4c;
   line-height: 1.25;
   font-size: 1rem;
