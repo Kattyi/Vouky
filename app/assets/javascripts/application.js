@@ -15,6 +15,7 @@
 //= require tether
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require social-share-button
 //= require_tree .
 
 $(document).on('turbolinks:load', (function() {

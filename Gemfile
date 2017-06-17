@@ -68,3 +68,5 @@ end
 
 # Google Translate (with Bulk translate) in Ruby | https://github.com/seejohnrun/easy_translate
 gem 'easy_translate'
+
+gem 'social-share-button', '~> 0.1.6'
