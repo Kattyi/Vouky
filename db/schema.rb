@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614165459) do
+ActiveRecord::Schema.define(version: 20170617003046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,41 +42,10 @@ ActiveRecord::Schema.define(version: 20170614165459) do
     t.index ["dictionary_id"], name: "index_dictionaries_categories_on_dictionary_id", using: :btree
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.text     "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "language_id"
-    t.index ["language_id"], name: "index_groups_on_language_id", using: :btree
-  end
-
-  create_table "groups_members", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "group_id"
-    t.index ["group_id"], name: "index_groups_members_on_group_id", using: :btree
-    t.index ["user_id"], name: "index_groups_members_on_user_id", using: :btree
-  end
-
   create_table "languages", force: :cascade do |t|
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "logins", force: :cascade do |t|
-    t.datetime "last_login"
-    t.text     "browser_type"
-    t.text     "ip_address"
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_logins_on_user_id", using: :btree
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_reports_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,10 +71,5 @@ ActiveRecord::Schema.define(version: 20170614165459) do
   add_foreign_key "dictionaries", "users"
   add_foreign_key "dictionaries_categories", "categories"
   add_foreign_key "dictionaries_categories", "dictionaries"
-  add_foreign_key "groups", "languages"
-  add_foreign_key "groups_members", "groups"
-  add_foreign_key "groups_members", "users"
-  add_foreign_key "logins", "users"
-  add_foreign_key "reports", "users"
   add_foreign_key "users", "languages"
 end
