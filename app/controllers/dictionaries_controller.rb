@@ -69,17 +69,19 @@ class DictionariesController < ApplicationController
     else
       @dictionary = Dictionary.create(dictionary_params)
       mother_lang = Language.find(current_user.language_id).name.downcase
+      source_dest_lang = Language.find(@dictionary.language_id).name.downcase
 
       if @dictionary.translation.empty?
-        source_lang = Language.find(@dictionary.language_id).name.downcase
-        @dictionary.translation = EasyTranslate.translate(@dictionary.word, from: source_lang, to: mother_lang)
+        @dictionary.translation = EasyTranslate.translate(@dictionary.word, from: source_dest_lang, to: mother_lang)
       elsif @dictionary.word.empty?
-        dest_lang = Language.find(@dictionary.language_id).name.downcase
-        @dictionary.word = EasyTranslate.translate(@dictionary.translation, from: mother_lang, to: dest_lang)
+        @dictionary.word = EasyTranslate.translate(@dictionary.translation, from: mother_lang, to: source_dest_lang)
       end
+
+      @dictionary.save
+
       @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
                                    .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
-      @dictionary.save
+
       flash[:success] = @dictionary.word + " created"
       redirect_to dictionaries_path(language: @dictionary.language_id)
     end
