@@ -5,16 +5,40 @@ class DictionariesController < ApplicationController
   def index
     search_pattern = 'lower(word) LIKE ? OR lower(translation) LIKE ?'
     if params[:term]
-      @dictionaries = Dictionary.where(user_id: current_user.id)
-                          .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
-                          .where(language_id: params[:language])
-                          .order(created_at: :desc)
-                          .paginate(page: params[:page]).per_page(30)
+      if params[:category_id]
+        @dictionaries = Dictionary
+                            .joins(:dictionaries_categories)
+                            .where(dictionaries_categories: {category_id: params[:category_id]})
+                            .where(user_id: current_user.id)
+                            .where(language_id: params[:language])
+                            .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                            .order(created_at: :desc)
+                            .paginate(page: params[:page]).per_page(30)
+      else
+        @dictionaries = Dictionary
+                            .where(user_id: current_user.id)
+                            .where(language_id: params[:language])
+                            .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
+                            .order(created_at: :desc)
+                            .paginate(page: params[:page]).per_page(30)
+      end
     else
-      @dictionaries = Dictionary.where(user_id: current_user.id)
-                          .where(language_id: params[:language])
-                          .order(created_at: :desc)
-                          .paginate(page: params[:page]).per_page(30)
+      if params[:category_id]
+        @dictionaries = Dictionary
+                            .joins(:dictionaries_categories)
+                            .where(dictionaries_categories: {category_id: params[:category_id]})
+                            .where(user_id: current_user.id)
+                            .where(language_id: params[:language])
+                            .order(created_at: :desc)
+                            .paginate(page: params[:page]).per_page(30)
+
+      else
+        @dictionaries = Dictionary
+                            .where(user_id: current_user.id)
+                            .where(language_id: params[:language])
+                            .order(created_at: :desc)
+                            .paginate(page: params[:page]).per_page(30)
+      end
     end
 
     @language_list = Language.all
@@ -69,7 +93,7 @@ class DictionariesController < ApplicationController
     @dictionary.update(dictionary_params)
 
     @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
-                                                 .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
+                                 .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
 
     redirect_to edit_dictionary_path(@dictionary)
   end

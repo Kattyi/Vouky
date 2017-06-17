@@ -3,7 +3,7 @@
   <td class="text-left"><%= dictionary.translation %></td>
   <td class="text-left">
     <% categories_for_word(dictionary.id).each do |cat| %>
-        <button type="button" class="btn btn-sm btn-outline-secondary margin_bottom"><%= cat.category.name %></button>
+        <%= link_to cat.category.name, dictionaries_path(category_id: cat.category.id, language: dictionary.language_id), class: "btn btn-sm btn-outline-secondary margin_bottom" %>
     <% end %>
   </td>
   <td>
