@@ -9,14 +9,13 @@ class DictionariesController < ApplicationController
                           .where(search_pattern, "%#{params[:term]}%".downcase, "%#{params[:term]}%".downcase)
                           .where(language_id: params[:language])
                           .order(created_at: :desc)
-                          .page params[:page]
+                          .paginate(page: params[:page]).per_page(30)
     else
       @dictionaries = Dictionary.where(user_id: current_user.id)
                           .where(language_id: params[:language])
                           .order(created_at: :desc)
-                          .page params[:page]
+                          .paginate(page: params[:page]).per_page(30)
     end
-    @dictionaries.without_count
 
     @language_list = Language.all
     @categories_list = Category.all

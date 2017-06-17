@@ -1,0 +1,2 @@
+$('#dictionaries').append('<%= escape_javascript render(@dictionaries) %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@dictionaries) %>');

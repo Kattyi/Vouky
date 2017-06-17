@@ -55,8 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # data generator | https://github.com/stympy/faker
 gem 'faker', '~> 1.7', '>= 1.7.3'
-# db paging | https://github.com/kaminari/kaminari
-gem 'kaminari'
+
+# pagination | https://github.com/mislav/will_paginate
+gem 'will_paginate', '~> 3.1.0'
 
 # Bootstrap 4 ruby gem for Ruby on Rails | https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
 gem 'bootstrap', '~> 4.0.0.alpha6'

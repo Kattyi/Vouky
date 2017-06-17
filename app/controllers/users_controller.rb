@@ -6,10 +6,12 @@ class UsersController < ApplicationController
   def index
     # OPTIMIZE move to model user.rb
     if params[:term]
-      @users = User.where('lower(name) LIKE ?', "%#{params[:term]}%".downcase).order(created_at: :desc).page params[:page]
+      @users = User.where('lower(name) LIKE ?', "%#{params[:term]}%".downcase)
+                   .order(created_at: :desc)
+                   .paginate(page: params[:page]).per_page(30)
     else
-      @users = User.order(created_at: :desc).page params[:page]
-      @users.without_count
+      @users = User.order(created_at: :desc)
+                   .paginate(page: params[:page]).per_page(30)
     end
 
   end
