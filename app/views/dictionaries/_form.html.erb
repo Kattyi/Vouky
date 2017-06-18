@@ -16,14 +16,14 @@
       </div>
 
       <div class="row">
-        <div class="col-6 marginTop">
+        <div class="col-6 margin_top">
           <% unless @language_list.nil? %>
               <%= f.select :language_id, @language_list.map {|lang| [lang.name, "#{lang.id}"]}, {selected: params[:language], required: true}, {class: "custom_select"} %>
           <% end %>
         </div>
 
         <%= f.fields_for :dictionaries_category do |dc| %>
-            <div class="col-6 marginTop">
+            <div class="col-6 margin_top">
               <% unless @categories_list.nil? %>
                   <%= dc.select :category_id, @categories_list.map {|cat| [cat.name, "#{cat.id}"]}, {prompt: "Select category"}, {class: "custom_select"} %>
               <% end %>
@@ -32,7 +32,7 @@
 
       </div>
       <div class="row">
-        <div class="col-12 marginTop">
+        <div class="col-12 margin_top">
           <div class="btn-group float-right" role="group" aria-label="Actions">
             <%= f.submit "Save", class: "btn btn-outline-secondary btn-lg" %>
             <% unless @language_list.nil? %>
