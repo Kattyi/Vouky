@@ -14,13 +14,13 @@
 
   <div class="col">
     <% if params[:term] %>
-        <%= link_to dictionaries_path(language: params[:language], category_id: params[:category_id]), class: "btn btn-lg btn-outline-danger margin_bottom margin_top float-right", 'aria-label': "Close" do %>
+        <%= link_to dictionaries_path(language: params[:language], category_id: params[:category_id]), class: "btn btn-outline-danger margin_bottom margin_top margin_left float-right", 'aria-label': "Close" do %>
             <span><%= 'Filter: ' + params[:term] %></span>
             <span aria-hidden="true">&times;</span>
         <% end %>
     <% end %>
     <% if params[:category_id] %>
-        <%= link_to dictionaries_path(language: params[:language], term: params[:term]), class: "btn btn-lg btn-outline-danger margin_bottom margin_top float-right", 'aria-label': "Close" do %>
+        <%= link_to dictionaries_path(language: params[:language], term: params[:term]), class: "btn btn-outline-danger margin_bottom margin_top margin_left float-right", 'aria-label': "Close" do %>
             <span><%= 'Filter: ' + Category.find(params[:category_id]).name %></span>
             <span aria-hidden="true">&times;</span>
         <% end %>
