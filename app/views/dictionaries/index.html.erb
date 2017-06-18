@@ -1,11 +1,36 @@
 <% provide(:title, "Dictionary") %>
-<h1>
-  <% if Language.find_by(id: params[:language]) %>
-      <%= Language.find_by(id: params[:language]).name %>
-  <% else %>
-      Dictionary
-  <% end %>
-</h1>
+
+<div class="row">
+
+  <div class="col">
+    <h1>
+      <% if Language.find_by(id: params[:language]) %>
+          <%= link_to Language.find_by(id: params[:language]).name, dictionaries_path(language: params[:language]), {style: 'color:#000000;'} %>
+      <% else %>
+          Dictionary
+      <% end %>
+    </h1>
+  </div>
+
+  <div class="col">
+    <% if params[:term] %>
+        <%= link_to dictionaries_path(language: params[:language]), class: "btn btn-lg btn-outline-danger margin_bottom margin_top float-right", 'aria-label': "Close" do %>
+            <span><%= 'Filter: ' + params[:term] %></span>
+            <span aria-hidden="true">&times;</span>
+        <% end %>
+    <% elsif params[:category_id] %>
+        <%= link_to dictionaries_path(language: params[:language]), class: "btn btn-lg btn-outline-danger margin_bottom margin_top float-right", 'aria-label': "Close" do %>
+            <span><%= 'Filter: ' +  Category.find(params[:category_id]).name %></span>
+            <span aria-hidden="true">&times;</span>
+        <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+
+
+
 
 <% # TODO %>
 <% # OPTIMIZE %>
