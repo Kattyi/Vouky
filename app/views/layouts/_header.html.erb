@@ -33,7 +33,10 @@
           <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
               <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
               <%= hidden_field_tag :language, params[:language] %>
-              <%= submit_tag 'Search', name: nil, class: "btn btn-outline-secondary my-2 my-sm-0" %>
+              <% if params[:category_id] %>
+                  <%= hidden_field_tag :category_id, params[:category_id] %>
+              <% end %>
+              <%= submit_tag 'Search', class: "btn btn-outline-secondary my-2 my-sm-0" %>
           <% end %>
       <% end %>
 
