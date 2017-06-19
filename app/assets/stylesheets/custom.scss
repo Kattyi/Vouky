@@ -53,3 +53,54 @@
 .margin_left {
   margin-left: 1rem;
 }
+
+.pagination {
+  padding: 0.3em;
+  cursor: default;
+
+  a, span, em {
+    padding: 0.2em 0.5em;
+    margin-left: 0.2rem;
+    color: #CCCCCC;
+  }
+
+  a, em {
+    border: 1px solid #CCCCCC;
+    border-radius: 0.25rem;
+  }
+
+  .disabled {
+    color: #CCCCCC;
+  }
+
+  .current {
+    color: white;
+    border-color: #d9534f;
+    background-color: #d9534f;
+  }
+
+  a {
+    background-color: transparent;
+    &:hover, &:focus {
+      color: white;
+      background-color: #CCCCCC;
+    }
+  }
+
+  .page_info {
+    color: #CCCCCC;
+    padding-top: 0.8rem;
+  }
+
+  .previous_page, .next_page {
+    border-width: 1px;
+  }
+
+  .previous_page {
+    margin-right: 1rem;
+  }
+
+  .next_page {
+    margin-left: 1rem;
+  }
+}

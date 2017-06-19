@@ -70,3 +70,5 @@ end
 gem 'easy_translate'
 
 gem 'social-share-button', '~> 0.1.6'
+
+gem 'newrelic_rpm'

@@ -82,7 +82,7 @@ class DictionariesController < ApplicationController
       @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
                                    .first_or_create(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
 
-      flash[:success] = @dictionary.word + " created"
+      flash[:success] = @dictionary.word + " - CREATED"
       redirect_to dictionaries_path(language: @dictionary.language_id)
     end
 
@@ -91,7 +91,7 @@ class DictionariesController < ApplicationController
 
   def update
     @dictionary = Dictionary.find(params[:id])
-    flash[:success] = @dictionary.word + " edited"
+    flash[:success] = @dictionary.word + " - EDITED"
     @dictionary.update(dictionary_params)
 
     @dictionaries_category = DictionariesCategory.where(dictionary_id: @dictionary.id, category_id: params[:dictionary][:dictionaries_category][:category_id])
@@ -102,7 +102,7 @@ class DictionariesController < ApplicationController
 
   def destroy
     @dictionary = Dictionary.find(params[:id])
-    flash[:success] = @dictionary.word + " deleted"
+    flash[:success] = @dictionary.word + " - DELETED"
     @dictionary.destroy
     redirect_back(fallback_location: dictionaries_path)
   end

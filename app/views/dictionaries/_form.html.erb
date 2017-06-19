@@ -38,7 +38,7 @@
             <% unless @language_list.nil? %>
                 <%= f.submit "Translate", class: "btn btn-outline-secondary btn-lg" %>
             <% else %>
-                <%= link_to "Back", dictionaries_path(language: @dictionary.language_id), class: "btn btn-outline-secondary btn-lg float-right" %>
+                <%= link_to "Back", dictionaries_path(language: @dictionary.language_id), class: "btn btn-outline-secondary btn-lg" %>
             <% end %>
           </div>
         </div>

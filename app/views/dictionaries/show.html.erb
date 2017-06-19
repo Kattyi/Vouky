@@ -6,6 +6,8 @@
     <th class="text-center">Word</th>
     <th class="text-center">Translation</th>
     <th class="text-center">Categories</th>
+    <th class="text-center">Created</th>
+    <th class="text-center">Last update</th>
   </tr>
 
   <tr>
@@ -13,8 +15,23 @@
     <td class="text-center"><%= @dictionary.translation %></td>
     <td class="text-center">
       <% categories_for_word(@dictionary.id).each do |cat| %>
-          <button type="button" class="btn btn-sm btn-outline-secondary margin_bottom"><%= cat.category.name %></button>
+          <%= link_to cat.category.name,
+                      dictionaries_path(category_id: cat.category.id,
+                                        language: @dictionary.language_id,
+                                        term: params[:term]),
+                                        class: "btn btn-sm btn-outline-secondary margin_bottom" %>
       <% end %>
     </td>
+    <td class="text-center"><%= @dictionary.created_at.localtime.ctime %></td>
+    <td class="text-center"><%= @dictionary.updated_at.localtime.ctime %></td>
   </tr>
 </table>
+
+<div class="row">
+  <div class="col-12 margin_top">
+    <div class="btn-group float-right" role="group" aria-label="Actions">
+      <%= link_to "Edit", edit_dictionary_path(@dictionary), class: "btn btn-outline-secondary btn-lg" %>
+      <%= link_to "Back", dictionaries_path(language: @dictionary.language_id), class: "btn btn-outline-secondary btn-lg" %>
+    </div>
+  </div>
+</div>
