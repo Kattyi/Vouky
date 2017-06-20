@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
 
   get 'auth/facebook/callback', to: 'sessions#create'
-  get 'auth/failure',           to: redirect('/login')
+  get 'auth/failure',           to: redirect('/')
 
   resources :languages
   resources :dictionaries_categories

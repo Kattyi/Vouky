@@ -5,5 +5,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            ENV['FACEBOOK_APP_ID'],
            ENV['FACEBOOK_SECRET_KEY'],
            scope: 'public_profile',
-           info_fields: 'id,name,link'
+           info_fields: 'id,name'
 end
