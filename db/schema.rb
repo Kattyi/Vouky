@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170617131335) do
+ActiveRecord::Schema.define(version: 20170620210818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170617131335) do
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.integer  "language_id"
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["language_id"], name: "index_users_on_language_id", using: :btree
   end

@@ -5,3 +5,36 @@
 .jumbotron {
   text-align: center;
 }
+
+.social-share-button {
+  a {
+    position:relative;
+    background-image: none;
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    width: 2rem;
+  }
+  a:before {
+    font-family: FontAwesome;
+  }
+
+  a:hover, a:focus, a:active, a:visited {
+    text-decoration: none;
+  }
+}
+
+.social-share-button-facebook:before {
+  content: "\f09a";
+  color: #3B5998;
+}
+
+.social-share-button-twitter:before {
+  content: "\f099";
+  color: #55ACEE;
+}
+
+.social-share-button-google_plus:before {
+  content: "\f0d5";
+  color: #DD4B39;
+}

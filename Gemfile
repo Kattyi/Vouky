@@ -69,6 +69,13 @@ end
 # Google Translate (with Bulk translate) in Ruby | https://github.com/seejohnrun/easy_translate
 gem 'easy_translate'
 
+# Helper for add social share feature in your Rails app | https://github.com/huacnlee/social-share-button
 gem 'social-share-button', '~> 0.1.6'
 
+# New Relic RPM Ruby Agent | https://github.com/newrelic/rpm
 gem 'newrelic_rpm'
+
+# Font-Awesome Sass gem for use in Ruby/Rails projects | https://github.com/FortAwesome/font-awesome-sass#a-ruby-on-rails
+gem 'font-awesome-sass', '~> 4.7.0'
+
+gem 'omniauth-facebook'
