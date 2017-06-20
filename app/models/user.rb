@@ -75,6 +75,8 @@ class User < ApplicationRecord
     user.email = "#{auth['uid']}@#{auth['provider']}.com"
     user.password = auth['uid']
     user.name = auth['info']['name']
+    user.activated = true
+    user.language_id = 13
     if User.exists?(user)
       user
     else
