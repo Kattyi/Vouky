@@ -77,5 +77,3 @@ gem 'newrelic_rpm'
 
 # Font-Awesome Sass gem for use in Ruby/Rails projects | https://github.com/FortAwesome/font-awesome-sass#a-ruby-on-rails
 gem 'font-awesome-sass', '~> 4.7.0'
-
-gem 'omniauth-facebook'
