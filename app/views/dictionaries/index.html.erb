@@ -3,9 +3,9 @@
 <div class="row">
 
   <div class="col">
-    <h1>
+    <h1 class="display-4">
       <% if Language.find_by(id: params[:language]) %>
-          <%= link_to Language.find_by(id: params[:language]).name, dictionaries_path(language: params[:language]), {style: 'color:#000000;'} %>
+          <%= link_to Language.find_by(id: params[:language]).name, dictionaries_path(language: params[:language]) %>
       <% else %>
           Dictionary
       <% end %>
@@ -54,4 +54,7 @@
     </table>
 <% end %>
 
-<%= will_paginate @dictionaries %>
+<div class="row justify-content-center">
+  <%= will_paginate @dictionaries %>
+</div>
+

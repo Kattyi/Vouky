@@ -23,6 +23,7 @@
 @import "font-awesome";
 
 .container-fluid {
+  padding-top: 5rem;
   padding-bottom: 5rem;
 }
 
@@ -40,6 +41,31 @@ h1 {
   height: 4rem;
 }
 
+#long_logo {
+  width: 50%;
+  height: 50%;
+  margin-bottom: 2rem;
+}
+
 .alert {
   margin-top: 1rem;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  i {
+    color: red;
+  }
+}
+
+a:focus, a:hover, a:active, a:visited {
+  text-decoration: none !important;
 }

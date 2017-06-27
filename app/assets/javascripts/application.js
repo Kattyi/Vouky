@@ -23,7 +23,8 @@ $(document).on('turbolinks:load', (function() {
         $(window).scroll(function() {
             var url = $('.pagination .next_page').attr('href');
             if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-                $('.pagination').text("Please Wait...");
+                $('.pagination').html("<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\">" +
+                    "</i><span class=\"sr-only\">Loading...</span>")
                 return $.getScript(url);
             }
         });

@@ -1,15 +1,16 @@
 <header>
-  <nav class="navbar navbar-toggleable-sm navbar-light bg-faded" id="navbar">
-    <%= link_to image_tag("vouky.svg", alt: "Vouky logo", id: "logo", class: "navbar-brand"), root_path %>
+  <nav class="fixed-top navbar navbar-toggleable-sm navbar-light bg-faded" id="navbar">
+    <%= link_to image_tag("header_logo.svg", alt: "Vouky logo", id: "logo"), root_path %>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <% if logged_in? %>
             <li class="nav-item"><%= link_to 'Dictionaries', languages_path, class: "nav-link" %></li>
-            <div class="dropdown">
+            <li class="dropdown">
               <a class="nav-link dropdown-toggle" type="link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                 <%= current_user.name %>
               </a>
@@ -22,24 +23,25 @@
                 <div class="dropdown-divider"></div>
                 <%= link_to "Log out", logout_path, method: :delete, class: "dropdown-item" %>
               </div>
-            </div>
+            </li>
+            <li>
+              <% if logged_in? %>
+                  <% # OPTIMIZE nerob query ked neni v modeli specifikovany search %>
+                  <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+                      <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
+                      <%= hidden_field_tag :language, params[:language] %>
+                      <% if params[:category_id] %>
+                          <%= hidden_field_tag :category_id, params[:category_id] %>
+                      <% end %>
+                      <%= submit_tag 'Search', class: "btn btn-outline-secondary my-2 my-sm-0" %>
+                  <% end %>
+              <% end %>
+            </li>
         <% else %>
             <li class="nav-item"><%= link_to 'Log in', login_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Sign up', signup_path, class: "nav-link" %></li>
         <% end %>
       </ul>
-
-      <% if logged_in? %>
-          <% # OPTIMIZE nerob query ked neni v modeli specifikovany search %>
-          <%= form_tag(request.path, method: :get, class: "form-inline my-2 my-lg-0") do %>
-              <%= text_field_tag :term, params[:term], class: "form-control mr-sm-2", placeholder: "Search" %>
-              <%= hidden_field_tag :language, params[:language] %>
-              <% if params[:category_id] %>
-                  <%= hidden_field_tag :category_id, params[:category_id] %>
-              <% end %>
-              <%= submit_tag 'Search', class: "btn btn-outline-secondary my-2 my-sm-0" %>
-          <% end %>
-      <% end %>
-
     </div>
   </nav>
 </header>

@@ -7,7 +7,8 @@ class LanguagesController < ApplicationController
                        .where(dictionaries: {user_id: id})
                        .where('lower(name) LIKE ?', "%#{params[:term]}%".downcase)
                        .group(:name)
-                       .order("count(languages.name) DESC").count
+                       .order("count(languages.name) DESC")
+                       .count
     else
       @languages = Language.joins(:dictionaries)
                        .where(dictionaries: {user_id: id})
@@ -16,7 +17,6 @@ class LanguagesController < ApplicationController
                        .count
     end
     @languages_ids = Language.joins(:dictionaries).select(:id)
-
   end
 
   private
