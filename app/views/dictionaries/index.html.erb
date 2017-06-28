@@ -1,7 +1,6 @@
 <% provide(:title, "Dictionary") %>
 
-<div class="row">
-
+<div class="row align-items-center">
   <div class="col">
     <h1 class="display-4">
       <% if Language.find_by(id: params[:language]) %>
@@ -26,7 +25,6 @@
         <% end %>
     <% end %>
   </div>
-
 </div>
 
 <% # TODO %>

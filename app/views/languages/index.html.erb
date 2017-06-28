@@ -1,6 +1,6 @@
 <% provide(:title, "Dictionaries") %>
 
-<div class="row">
+<div class="row align-items-center">
   <div class="col-6">
     <h1 class="display-4">
       <%= link_to 'Dictionaries', languages_path %>
@@ -8,11 +8,11 @@
   </div>
 
   <% if @languages.size == 0 %>
-      <div class="col-10" id="first_dictionary">
+      <div class="col-8" id="first_dictionary">
         <%= link_to "Create your first dictionary now!", dictionaries_path, class: "btn btn-outline-success btn-lg btn-block" %>
       </div>
   <% else %>
-      <div class="col-6">
+      <div class="col-6 ">
         <%= link_to "New dictionary", dictionaries_path, class: "btn btn-outline-secondary float-right margin_bottom margin_top" %>
       </div>
   <% end %>
@@ -38,7 +38,7 @@
                       <% if day_count == 0 %>
                           today
                       <% else %>
-                          <%= day_count.to_s + " ago" %>
+                          <%= pluralize(day_count.to_s, 'day') + " ago" %>
                       <% end %>
                     </small>
                   </p>
